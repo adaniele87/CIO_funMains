@@ -1,69 +1,13 @@
+#include "animations.h"
 #include "console.h"
 using namespace cio;
-
-const int FPS = 15;
-
-class Object
-{
-    int xCoord;
-    int yCoord;
-    int frame;
-public:
-    Object(int _x, int _y)
-    {
-        xCoord = _x;
-        yCoord = _y;
-        frame = 0;
-    }
-
-    void draw(void (*animation)(int&,int&,int&))
-    {
-        (*animation)(xCoord, yCoord, frame);
-    }
-
-    int x(){ return xCoord; }
-    int y(){ return yCoord; }
-
-    void moveLeft() { xCoord--; }
-    void moveRight(){ xCoord++; }
-    void moveUp()   { yCoord--; }
-    void moveDown() { yCoord++; }
-};
-
-void marioWalking(int&,int&,int&);
-
-int main()
-{
-    int r = console.getRows();
-    int c = console.getCols();
-    int key = 0;
-    Object mario(0, r-19);
-    
-    while (true)
-    {
-        console.clear();
-        mario.draw(marioWalking);
-        console >> key;
-
-        switch(key)
-        {
-        case LEFT:
-            mario.moveLeft();
-            break;
-        case RIGHT:
-            mario.moveRight();
-            break;
-        }
-    }
-    return 0;
-}
 
 void marioWalking(int& c, int& r, int& frame)
 {
     (frame>3) && (frame=0);
 
     int i;
-    for (i = 0; i < FPS; i++)
+    for (i = 0; i < DRAWRATE; i++)
     {
         switch(frame)
         {

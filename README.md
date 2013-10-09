@@ -1,6 +1,7 @@
 CIO_funMains
 ============
 
-These cpp files were written for fun just to see the interesting things that can be done with the CIO Library made
-in OOP344. Feel free to clone this repository, make changes and push them back so everyone can see the changes you've
-made. Thanks for viewing, enjoy!
+I decided to make this adjustment to the library to bring out the imagination in us all on how
+we can make simple interactive animations just using the CIO library and the display method created
+in assignment one.
+Pull, Enhance, Push, have fun with it!

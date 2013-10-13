@@ -11,10 +11,14 @@
 /*                      start displaying the animation   */
 /* int& secondParam= r; will hold the row of where to    */
 /*                      start displaying the animation   */
-/* int& thirdParam = f; f will hold the frame to display */
+/* int& thirdParam = f; will hold the frame to display   */
 /*                      when function is called          */
 /*********************************************************/
 
-const int DRAWRATE = 15; // how many times frame will print to screen
+const int DRAWRATE = 10; // how many times frame will print to screen
 
-void marioWalking(int& c, int& r, int& f);
+void car       (int& c, int& r, int& f);
+void house     (int& c, int& r, int& f);
+void marioWalk (int& c, int& r, int& f);
+void tree      (int& c, int& r, int& f);
+void truck     (int& c, int& r, int& f);

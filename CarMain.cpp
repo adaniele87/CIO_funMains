@@ -33,6 +33,8 @@ int main()
     while (running)
     {
         console.clear();
+        
+        //draws all images
         House.draw(house);
         for (i = 0; Tree[i]; i++)
         {
@@ -58,6 +60,7 @@ int main()
                 House.moveLeft();
             }
             break;
+
         case LEFT:
             if (Car.x() >= 0)
             {
@@ -72,6 +75,7 @@ int main()
                 House.moveRight();
             }
             break;
+
         }
     }
     return 0;

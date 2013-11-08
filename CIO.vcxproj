@@ -79,8 +79,14 @@
     <ClCompile Include="animations.cpp" />
     <ClCompile Include="bconsole.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="CarMain.cpp" />
+    <ClCompile Include="CarMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="moving.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="threads.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />

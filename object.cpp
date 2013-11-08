@@ -25,9 +25,30 @@ void Object::draw(void (*animation)(int&,int&,int&))
     (*animation)(xCoord, yCoord, frame);
 }
 
-/* Getters. Return Object's Xcoord or Ycoord */
-int Object::x(){ return xCoord; }
-int Object::y(){ return yCoord; }
+/* Getter + Setter. Return Object's Xcoord or Ycoord */
+int& Object::x(int c)
+{
+    if (c < 0)
+    {
+        return xCoord;
+    }
+    else
+        xCoord = c;
+
+    return xCoord;
+}
+
+int& Object::y(int r)
+{
+    if (r < 0)
+    {
+        return yCoord;
+    }
+    else
+        yCoord = r;
+
+    return yCoord;
+}
 
 /* Alter Object's coordinates to allow movement on the screen */
 void Object::moveLeft() { xCoord--; }

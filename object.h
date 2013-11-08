@@ -21,8 +21,8 @@ public:
 
     void draw(void (*animation)(int&,int&,int&));
 
-    int x();
-    int y();
+    int& x(int r = -1);
+    int& y(int c = -1);
 
     void moveLeft();
     void moveRight();

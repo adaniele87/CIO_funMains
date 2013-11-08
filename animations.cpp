@@ -17,6 +17,11 @@ void car(int& c, int& r, int& f)
     console.display("\\_/   \\_/", r+3, c+2);
 }
 
+void character(int& c, int& r, int& f)
+{
+    console.display("X", r, c);
+}
+
 void house(int& c, int& r, int& f)
 {
     console.display("/\\", r, c+5);

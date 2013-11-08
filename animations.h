@@ -18,6 +18,7 @@
 const int DRAWRATE = 10; // how many times frame will print to screen
 
 void car       (int& c, int& r, int& f);
+void character (int& c, int& r, int& f);
 void house     (int& c, int& r, int& f);
 void marioWalk (int& c, int& r, int& f);
 void tree      (int& c, int& r, int& f);

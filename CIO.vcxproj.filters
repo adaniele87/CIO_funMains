@@ -30,6 +30,12 @@
     <ClCompile Include="CarMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="moving.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="threads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h">

@@ -26,7 +26,7 @@ int main()
     Object mover4(c,r);
     Object me(0,0,3);
 
-    int i = 0;
+    int i = 20;
     while(!done)
     {
         Ticks = GetTickCount();

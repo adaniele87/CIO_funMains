@@ -1,7 +1,15 @@
 #include "animations.h"
 #include "console.h"
 #include "object.h"
+#include <windows.h>
 using namespace cio;
+
+int randomNumber(int lowerRange, int higherRange)
+{
+    int milliseconds = Get
+        r
+
+}
 
 int main()
 {

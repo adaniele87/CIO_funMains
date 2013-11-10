@@ -14,12 +14,17 @@ class Object
 {
     int xCoord;
     int yCoord;
+    int speed;
+protected:
     int frame;
 public:
-    Object(int _x, int _y);
+    Object();
+    Object(int _x, int _y, int _speed = 1);
     virtual ~Object();
 
-    void draw(void (*animation)(int&,int&,int&));
+    virtual void draw(void (*animation)(int&,int&,int&));
+
+    void getInput();
 
     int& x(int r = -1);
     int& y(int c = -1);

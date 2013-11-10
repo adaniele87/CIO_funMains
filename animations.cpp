@@ -22,6 +22,11 @@ void character(int& c, int& r, int& f)
     console.display("X", r, c);
 }
 
+void oat(int& c, int& r, int& f)
+{
+    console.display("O", r, c);
+}
+
 void house(int& c, int& r, int& f)
 {
     console.display("/\\", r, c+5);
@@ -133,4 +138,3 @@ void truck(int& c, int& r, int& f)
     console.display("\\ \\/ /     \\ \\/ /", r+6, c+2);
     console.display("\\__/       \\__/", r+7, c+3);
 }
-

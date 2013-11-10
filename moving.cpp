@@ -1,64 +1,103 @@
 #include <Windows.h>
+#include <cstdarg>
 #include <conio.h>
 #include "console.h"
-#include "object.h"
+#include "fighter.h"
 #include "animations.h"
 using namespace cio;
 
-int speed = 3;
-
-void getInput(Object&);
-void testCollision(Object&, int, int);
+void testCollision(Object&, int = console.getCols()-1, int = console.getRows()-1);
 void moveEnemyClose(Object&, Object&);
-bool specialMove(int keyHit = 0, char* str = "UDLR");
+bool tooClose(Object&, Object&);
+bool contact(Object&, Object&);
 
 int main() 
 {
-    int Ticks;
+    bool done = false;
+    int Ticks = GetTickCount();
+    srand(Ticks);
+    int rMove =1;
     int r = console.getRows()-1;
     int c = console.getCols()-1;
 
-    Object me(0,0);
-    Object enemy(c,0);
+    Object mover(c/2,r/2);
+    Object mover2(c,0);
+    Object mover3(0,r);
+    Object mover4(c,r);
+    Object me(0,0,3);
 
-    while(true)
+    int i = 0;
+    while(!done)
     {
         Ticks = GetTickCount();
         console.clear();
+        mover.draw(character);
+        mover2.draw(character);
+        mover3.draw(character);
+        mover4.draw(character);
         me.draw(character);
-        enemy.draw(character);
 
-        getInput(me);
-        testCollision(me, c, r);
-        moveEnemyClose(enemy, me);
-        
-        if (specialMove()) console.alarm();
-
-        if (1000/30 > GetTickCount()-Ticks)
+        if (i==20)
         {
-            Sleep(1000/30-(GetTickCount()-Ticks));
+            srand(Ticks);
+            rMove = rand()%5;
+            i=0;
+        }
+        me.getInput();
+
+        switch (rMove)
+        {
+        default:
+            if (!tooClose(mover, me)) mover.moveUp();
+            if (!tooClose(mover2, me)) mover2.moveRight();
+            if (!tooClose(mover3, me)) mover3.moveLeft();
+            if (!tooClose(mover4, me)) mover4.moveDown();
+            break;
+        case 2:
+            if (!tooClose(mover, me)) mover.moveRight();
+            if (!tooClose(mover2, me)) mover2.moveUp();
+            if (!tooClose(mover3, me)) mover3.moveRight();
+            if (!tooClose(mover4, me)) mover4.moveLeft();
+            break;
+        case 3:
+            if (!tooClose(mover, me)) mover.moveDown();
+            if (!tooClose(mover2, me)) mover2.moveLeft();
+            if (!tooClose(mover3, me)) mover3.moveDown();
+            if (!tooClose(mover4, me)) mover4.moveUp();
+            break;
+        case 4:
+            if (!tooClose(mover, me)) mover.moveLeft();
+            if (!tooClose(mover2, me)) mover2.moveDown();
+            if (!tooClose(mover3, me)) mover3.moveUp();
+            if (!tooClose(mover4, me)) mover4.moveRight();
+            break;
+        }
+        testCollision(mover);
+        testCollision(mover2);
+        testCollision(mover3);
+        testCollision(mover4);
+        testCollision(me);
+
+        done = contact(me, mover);
+        if(!done) done = contact(me, mover2);
+        if(!done) done = contact(me, mover3);
+        if(!done) done = contact(me, mover4);
+        
+        i++;
+        
+        if (1000/20 > GetTickCount()-Ticks)
+        {
+            Sleep(1000/20-(GetTickCount()-Ticks));
         }
     }
+    console.clear();
+    console.display("YOU DIED!", r/2, c/2/4);
+    while(true);
 }
 
-void getInput(Object& me)
+bool contact(Object& player, Object& enemy)
 {
-    if(GetKeyState(VK_UP) & 0x80){
-        specialMove(VK_UP);
-        for(int i=0;i<speed;me.moveUp(),i++);
-    }
-    else if(GetKeyState(VK_DOWN) & 0x80){
-        specialMove(VK_DOWN);
-        for(int i=0;i<speed;me.moveDown(),i++);
-    }
-    else if(GetKeyState(VK_LEFT) & 0x80){
-        specialMove(VK_LEFT);
-        for(int i=0;i<speed;me.moveLeft(),i++);
-    }
-    else if(GetKeyState(VK_RIGHT) & 0x80){
-        specialMove(VK_RIGHT);
-        for(int i=0;i<speed;me.moveRight(),i++);
-    }
+    return player.x() == enemy.x() && player.y() == enemy.y();
 }
 
 void testCollision(Object& me, int c, int r)
@@ -71,41 +110,21 @@ void testCollision(Object& me, int c, int r)
 
 void moveEnemyClose(Object& enemy, Object& me)
 {
-    static int move = 0;
-    if(move == 2)
-    {
-        if(me.x() > enemy.x()) enemy.moveRight();
-        if(me.x() < enemy.x()) enemy.moveLeft();
-        if(me.y() > enemy.y()) enemy.moveDown();
-        if(me.y() < enemy.y()) enemy.moveUp();
-        move = 0;
-    }   
-    move++;
+    if(me.x() > enemy.x()) enemy.moveRight();
+    if(me.x() < enemy.x()) enemy.moveLeft();
+    if(me.y() > enemy.y()) enemy.moveDown();
+    if(me.y() < enemy.y()) enemy.moveUp();
 }
 
-bool specialMove(int keyHit, char* str)
+bool tooClose(Object& enemy, Object& me)
 {
-    static char move[5] = {'X'};
-
-    if (keyHit)
+    if ((me.x() > enemy.x() - 20) &&
+        (me.x() < enemy.x() + 20) &&
+        (me.y() > enemy.y() - 20) &&
+        (me.y() < enemy.y() + 20))
     {
-        for (int i=0; i<4; move[i]=move[i+1],i++);
-        switch(keyHit)
-        {
-        case VK_UP:
-            move[3] = 'U';
-            break;
-        case VK_DOWN:
-            move[3] = 'D';
-            break;
-        case VK_LEFT:
-            move[3] = 'L';
-            break;
-        case VK_RIGHT:
-            move[3] = 'R';
-            break;
-        }
+        moveEnemyClose(enemy, me);
+        return true;
     }
-
-    return !strcmp(move, str);
+    else return false;
 }

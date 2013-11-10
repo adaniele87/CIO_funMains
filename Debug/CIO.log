@@ -1,17 +1,17 @@
-﻿Build started 08/11/2013 12:09:52 AM.
+﻿Build started 10/11/2013 2:46:59 PM.
      1>Project "C:\Users\Andrew\Documents\GitHub\CIO_funMains\CIO.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt threads.cpp
-         threads.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt moving.cpp
+         moving.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Andrew\Documents\GitHub\CIO_funMains\Debug\CIO.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Andrew\Documents\GitHub\CIO_funMains\Debug\CIO.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Andrew\Documents\GitHub\CIO_funMains\Debug\CIO.lib" /MACHINE:X86 Debug\animations.obj
          Debug\bconsole.obj
          Debug\console.obj
          Debug\object.obj
-         Debug\threads.obj
+         Debug\moving.obj
          CIO.vcxproj -> C:\Users\Andrew\Documents\GitHub\CIO_funMains\Debug\CIO.exe
      1>Done Building Project "C:\Users\Andrew\Documents\GitHub\CIO_funMains\CIO.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.30
+Time Elapsed 00:00:01.60

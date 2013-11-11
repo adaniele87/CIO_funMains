@@ -1,9 +1,7 @@
 #include <Windows.h>
 #include <iostream>
-#include <cstdarg>
-#include <conio.h>
 #include "console.h"
-#include "fighter.h"
+#include "object.h"
 #include "animations.h"
 using namespace cio;
 
@@ -13,16 +11,26 @@ bool tooClose(Object&, Object&);
 bool contact(Object&, Object&);
 bool foundOat(Object&, Object&);
 
+const int slowEnemyBy  = 4; // slows down enemy
+const int slowPlayerBy = 2; // slows down player
+const int FPS          = 60; // regulate frames
+const int showScore1ln = 6; // how long to show float-away score on one line
+const int showScorexln = 4; // how many lines to show float-away score
+
 int main() 
 {
     bool done = false;
     char gameOver[40] = "You Died! Score: ";
+    int oatWorth = 300;
     int Ticks = GetTickCount();
     srand(Ticks);
     int rMove =1;
-    int r = console.getRows()-1;
-    int c = console.getCols()-1;
+    int r = console.getRows()-2;
+    int c = console.getCols()-2;
     int score = 0;
+    int lastScore = 0;
+    int displayTimes  = 3;
+    int displayTimes2 = 0;
 
     Object mover(c/2,r/2);
     Object mover2(c,0);
@@ -30,8 +38,10 @@ int main()
     Object mover4(c,r);
     Object me(0,0);
     Object Oat(rand()%c, rand()%r);
+    Object ScoreDisplay(0,0);
 
-    int slowDown = 0;
+    int slowDownEnemy = 0;
+    int slowDownPlayer = 0;
     int i = 20;
     while(!done)
     {
@@ -44,7 +54,36 @@ int main()
         me.draw(character);
         Oat.draw(oat);
 
-        me.getInput();
+        if (lastScore > 0)
+        {
+            if (displayTimes == showScore1ln)
+            {
+                console.setPos(ScoreDisplay.y(), ScoreDisplay.x());
+                std::cout << lastScore;
+                displayTimes--;
+            }
+            else
+            {
+                ScoreDisplay.x()++;
+                ScoreDisplay.y()--;
+                displayTimes2--;
+                displayTimes = showScore1ln;
+            }
+        }
+        else
+            displayTimes2 = showScorexln;
+
+        if (!displayTimes2)
+        {
+            lastScore = 0;
+            displayTimes = showScore1ln;
+        }
+
+        if (slowDownPlayer == slowPlayerBy)
+        {
+            me.getInput();
+            slowDownPlayer = 0;
+        }
 
         if (i==20)
         {
@@ -52,7 +91,7 @@ int main()
             rMove = rand()%5;
             i=0;
         }
-        if (slowDown == 2)
+        if (slowDownEnemy == slowEnemyBy)
         {
             switch (rMove)
             {
@@ -81,7 +120,7 @@ int main()
                 if (!tooClose(mover4, me)) mover4.moveRight();
                 break;
             }
-            slowDown = 0;
+            slowDownEnemy = 0;
         }
         testCollision(mover);
         testCollision(mover2);
@@ -96,23 +135,31 @@ int main()
         
         if (contact(me, Oat))
         {
+            ScoreDisplay.x() = Oat.x();
+            ScoreDisplay.y() = Oat.y();
             Oat.x(rand()%c);
             Oat.y(rand()%r);
-            score++;
+            score+=oatWorth;
+            if (oatWorth > 200) console.alarm();
+            lastScore = oatWorth;
+            oatWorth = 300;
         }
 
         i++;
-        slowDown++;
-        
-        if (1000/60 > GetTickCount()-Ticks)
+        slowDownEnemy++;
+        slowDownPlayer++;
+        oatWorth--;
+        if (oatWorth < 0) oatWorth = 0;
+
+        if (1000/FPS > GetTickCount()-Ticks)
         {
-            Sleep(1000/60-(GetTickCount()-Ticks));
+            Sleep(1000/FPS-(GetTickCount()-Ticks));
         }
     }
     console.clear();
     console.display("YOU DIED! score: ", r/2, c/2/4);
     std::cout << score;
-    while(true);
+    getchar();
 }
 
 bool contact(Object& player, Object& enemy)

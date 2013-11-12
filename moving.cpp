@@ -14,14 +14,14 @@ bool foundOat(Object&, Object&);
 const int slowEnemyBy  = 4; // slows down enemy
 const int slowPlayerBy = 2; // slows down player
 const int FPS          = 60; // regulate frames
-const int showScore1ln = 6; // how long to show float-away score on one line
+const int showScore1ln = 10; // how long to show float-away score on one line
 const int showScorexln = 4; // how many lines to show float-away score
 
 int main() 
 {
     bool done = false;
     char gameOver[40] = "You Died! Score: ";
-    int oatWorth = 300;
+    int oatWorth = 350;
     int Ticks = GetTickCount();
     srand(Ticks);
     int rMove =1;
@@ -142,7 +142,7 @@ int main()
             score+=oatWorth;
             if (oatWorth > 200) console.alarm();
             lastScore = oatWorth;
-            oatWorth = 300;
+            oatWorth = 350;
         }
 
         i++;

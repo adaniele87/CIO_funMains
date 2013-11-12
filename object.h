@@ -14,12 +14,11 @@ class Object
 {
     int xCoord;
     int yCoord;
-    int speed;
-protected:
     int frame;
+protected:
 public:
     Object();
-    Object(int _x, int _y, int _speed = 1);
+    Object(int _x, int _y);
     virtual ~Object();
 
     virtual void draw(void (*animation)(int&,int&,int&));
@@ -28,9 +27,10 @@ public:
 
     int& x(int r = -1);
     int& y(int c = -1);
-
+    void setDirection(int);
     void moveLeft();
     void moveRight();
     void moveUp();
     void moveDown();
+    void randMove(int);
 };

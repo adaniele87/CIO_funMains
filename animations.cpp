@@ -19,12 +19,48 @@ void car(int& c, int& r, int& f)
 
 void character(int& c, int& r, int& f)
 {
-    console.display("X", r, c);
+    switch(f)
+    {
+    default:
+        console.display("^^", r, c);
+        console.display("^^", r+1, c);  
+        break;
+    case 2:
+        console.display(">>", r, c);
+        console.display(">>", r+1, c); 
+        break;
+    case 3:
+        console.display("VV", r, c);
+        console.display("VV", r+1, c); 
+        break;
+    case 4:
+        console.display("<<", r, c);
+        console.display("<<", r+1, c); 
+        break;
+    }
+}
+void zombie(int& c, int& r, int& f)
+{
+    switch(f)
+    {
+    default:
+    case 1:
+    case 2:
+        console.display("(}", r, c);
+        console.display("|^", r+1, c);  
+        break;
+    case 3:
+    case 4:
+        console.display("{)", r, c);
+        console.display("^|", r+1, c); 
+        break;
+    }
 }
 
 void oat(int& c, int& r, int& f)
 {
-    console.display("O", r, c);
+    console.display("OO", r, c);
+    console.display("OO", r+1, c);
 }
 
 void house(int& c, int& r, int& f)

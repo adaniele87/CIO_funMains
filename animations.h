@@ -24,6 +24,7 @@ void house     (int& c, int& r, int& f);
 void marioWalk (int& c, int& r, int& f);
 void tree      (int& c, int& r, int& f);
 void truck     (int& c, int& r, int& f);
+void zombie    (int& c, int& r, int& f);
 
 
 //for fighting game
